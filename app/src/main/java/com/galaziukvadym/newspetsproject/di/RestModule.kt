@@ -1,6 +1,6 @@
 package com.galaziukvadym.newspetproject.di
 
-import com.galaziukvadym.newspetproject.data.services.NewsService
+import com.galaziukvadym.newspetproject.data.services.NewsApi
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -37,8 +37,8 @@ class RestModule {
 
     @Singleton
     @Provides
-    fun provideNewsService(retrofit: Retrofit) =
-        retrofit.create(NewsService::class.java)
+    fun provideNewsService(retrofit: Retrofit): NewsApi =
+        retrofit.create(NewsApi::class.java)
 
 
     companion object {

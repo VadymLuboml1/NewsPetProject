@@ -1,7 +1,6 @@
 package com.galaziukvadym.newspetproject.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.galaziukvadym.newspetproject.R
@@ -34,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         rvNews.adapter = adapter
         rvNews.layoutManager = LinearLayoutManager(this)
 
-        newsViewModel.getLiveData().observe(this, {Log.d("MainActivity", "emmitedData $it")
-        adapter.submitList(it)})
+        newsViewModel.getLiveData().observe(this, adapter::submitList)
     }
 }

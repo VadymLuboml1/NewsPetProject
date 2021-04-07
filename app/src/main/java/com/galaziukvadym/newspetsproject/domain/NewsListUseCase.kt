@@ -1,6 +1,5 @@
 package com.galaziukvadym.newspetproject
 
-import android.util.Log
 import com.galaziukvadym.newspetproject.domain.data.CachedNewsRepository
 import com.galaziukvadym.newspetproject.domain.data.NewsRepository
 import io.reactivex.Observable
@@ -18,11 +17,9 @@ class NewsListUseCase @Inject constructor(
     fun subscribeOnNews(): Observable<List<NewsDomainModel>> {
         return actualNewsObservable()
             .mergeWith(
-                cachedNewsRepository.getNewsObservable().subscribeOn(Schedulers.io()).doOnNext {
-                    Log.d("NewsListUseCase", "cachedNewsRepository.getNews $it")
-                })
+                cachedNewsRepository.getNewsObservable().subscribeOn(Schedulers.io())
+            )
             .distinctUntilChanged()
-            .doOnNext { Log.d("NewsListUseCase", "subscribeOnNews $it") }
     }
 
     fun requestActualNews() = requestMoreSubject.onNext(Unit)
@@ -33,8 +30,8 @@ class NewsListUseCase @Inject constructor(
             .flatMapSingle {
                 newsRepository.requestNews()
             }
+            .filter(List<NewsDomainModel>::isNotEmpty)
             .doOnNext(cachedNewsRepository::restoreNews)
-            .doOnNext { Log.d("NewsListUseCase", "actualNewsObservable $it") }
             .onErrorResumeNext(
                 cachedNewsRepository.getNewsObservable()
             )

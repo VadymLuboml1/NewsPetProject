@@ -14,7 +14,7 @@ interface LocalSavedNewsDao {
     fun clearAll()
 
     @Insert
-    fun addAll(newsDtos : List<NewsDatabaseDto>)
+    fun addAll(newsDtos: List<NewsDatabaseDto>)
 }
 
 @Entity(tableName = LOCAL_SAVED_NEWS_TABLE_NAME)

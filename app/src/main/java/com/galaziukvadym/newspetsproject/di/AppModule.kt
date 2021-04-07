@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.galaziukvadym.newspetproject.data.CachedNewsRepositoryImpl
 import com.galaziukvadym.newspetproject.data.NewsRepositoryImpl
 import com.galaziukvadym.newspetproject.data.database.LocalSavedNewsDatabase
-import com.galaziukvadym.newspetproject.data.services.NewsService
+import com.galaziukvadym.newspetproject.data.services.NewsApi
 import com.galaziukvadym.newspetproject.domain.data.CachedNewsRepository
 import com.galaziukvadym.newspetproject.domain.data.NewsRepository
 import dagger.Module
@@ -20,8 +20,8 @@ class AppModule(private val appContext: Context) {
 
     @Singleton
     @Provides
-    fun provideNewsRepository(newsService: NewsService): NewsRepository {
-        return NewsRepositoryImpl(newsService)
+    fun provideNewsRepository(newsApi: NewsApi): NewsRepository {
+        return NewsRepositoryImpl(newsApi)
     }
 
     @Singleton
