@@ -1,4 +1,4 @@
-package com.galaziukvadym.newspetproject.data.services
+package com.galaziukvadym.newspetproject.data.api
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

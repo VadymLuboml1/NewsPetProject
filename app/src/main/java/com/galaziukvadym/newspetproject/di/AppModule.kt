@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.galaziukvadym.newspetproject.data.CachedNewsRepositoryImpl
 import com.galaziukvadym.newspetproject.data.NewsRepositoryImpl
+import com.galaziukvadym.newspetproject.data.api.NewsApi
 import com.galaziukvadym.newspetproject.data.database.LocalSavedNewsDatabase
-import com.galaziukvadym.newspetproject.data.services.NewsApi
 import com.galaziukvadym.newspetproject.domain.data.CachedNewsRepository
 import com.galaziukvadym.newspetproject.domain.data.NewsRepository
 import dagger.Module

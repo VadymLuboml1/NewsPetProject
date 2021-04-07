@@ -2,7 +2,7 @@ package com.galaziukvadym.newspetproject.data
 
 import com.galaziukvadym.newspetproject.NewsDomainModel
 import com.galaziukvadym.newspetproject.data.mappers.NewsResponseMapper
-import com.galaziukvadym.newspetproject.data.services.NewsApi
+import com.galaziukvadym.newspetproject.data.api.NewsApi
 import com.galaziukvadym.newspetproject.domain.data.NewsRepository
 import io.reactivex.Single
 

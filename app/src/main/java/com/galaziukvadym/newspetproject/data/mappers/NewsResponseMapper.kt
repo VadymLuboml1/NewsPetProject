@@ -1,7 +1,7 @@
 package com.galaziukvadym.newspetproject.data.mappers
 
 import com.galaziukvadym.newspetproject.NewsDomainModel
-import com.galaziukvadym.newspetproject.data.services.NewsResponse
+import com.galaziukvadym.newspetproject.data.api.NewsResponse
 
 object NewsResponseMapper {
 
