@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.galaziukvadym.newspetproject.R
-import com.galaziukvadym.newspetsproject.presentation.adapter.NewsViewHolder
 
 class NewsUiModelAdapter : ListAdapter<RecordUiModel, RecyclerView.ViewHolder>(diffUtil) {
 

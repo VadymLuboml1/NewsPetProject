@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.galaziukvadym.newspetproject.R
 import com.galaziukvadym.newspetproject.app.AndroidApplication
 import com.galaziukvadym.newspetproject.presentation.adapter.NewsUiModelAdapter
-import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -26,8 +25,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
-        BehaviorSubject.create<String>().replay().autoConnect()
 
         adapter = NewsUiModelAdapter()
         rvNews.adapter = adapter
