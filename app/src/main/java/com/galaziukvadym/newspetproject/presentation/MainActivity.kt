@@ -1,7 +1,9 @@
 package com.galaziukvadym.newspetproject.presentation
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.galaziukvadym.newspetproject.R
 import com.galaziukvadym.newspetproject.app.AndroidApplication
@@ -21,15 +23,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         (application as AndroidApplication).getAppComponent().inject(this)
-    }
 
-    override fun onStart() {
-        super.onStart()
-
-        adapter = NewsUiModelAdapter()
+        adapter = NewsUiModelAdapter(newsViewModel::handleNewsAction)
         rvNews.adapter = adapter
         rvNews.layoutManager = LinearLayoutManager(this)
 
-        newsViewModel.getLiveData().observe(this, adapter::submitList)
+        newsViewModel.getLiveData().observe(this, ::handleState)
+    }
+
+    private fun handleState(state: State) {
+        when (state) {
+            is ShowContent -> adapter.submitList(state.uiModels)
+            is OpenScreen -> {
+                CustomTabsIntent.Builder().build()
+                    .launchUrl(this, Uri.parse(state.url))
+            }
+        }
     }
 }

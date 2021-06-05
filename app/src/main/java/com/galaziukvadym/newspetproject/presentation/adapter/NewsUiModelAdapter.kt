@@ -7,7 +7,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.galaziukvadym.newspetproject.R
 
-class NewsUiModelAdapter : ListAdapter<RecordUiModel, RecyclerView.ViewHolder>(diffUtil) {
+sealed class NewsAction
+data class OnItemClicked(val url: String) : NewsAction()
+data class OnImageClicked(val imageUrl: String) : NewsAction()
+data class OnTitleClicked(val author: String) : NewsAction()
+object OnLongItemClick : NewsAction()
+
+typealias NewsCallback = (NewsAction) -> Unit
+
+class NewsUiModelAdapter(private val newsCallback: NewsCallback) :
+    ListAdapter<RecordUiModel, RecyclerView.ViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -15,7 +24,7 @@ class NewsUiModelAdapter : ListAdapter<RecordUiModel, RecyclerView.ViewHolder>(d
     ): RecyclerView.ViewHolder {
 
         val view = LayoutInflater.from(parent.context).inflate(newsLayout, parent, false)
-        return NewsViewHolder(view)
+        return NewsViewHolder(view, newsCallback)
     }
 
 

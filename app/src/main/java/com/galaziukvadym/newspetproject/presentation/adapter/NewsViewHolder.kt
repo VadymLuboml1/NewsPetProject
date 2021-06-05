@@ -1,8 +1,6 @@
 package com.galaziukvadym.newspetproject.presentation.adapter
 
-import android.net.Uri
 import android.view.View
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.news_view_holder_layout.view.*
@@ -13,7 +11,8 @@ abstract class BaseRecordViewHolder<T : RecordUiModel>(itemView: View) :
     abstract fun bind(recordUiModel: T)
 }
 
-class NewsViewHolder(itemView: View) : BaseRecordViewHolder<NewsUiModel>(itemView) {
+class NewsViewHolder(itemView: View, private val newsCallback: NewsCallback) :
+    BaseRecordViewHolder<NewsUiModel>(itemView) {
 
     override fun bind(recordUiModel: NewsUiModel) {
         with(itemView) {
@@ -23,9 +22,21 @@ class NewsViewHolder(itemView: View) : BaseRecordViewHolder<NewsUiModel>(itemVie
 
             Glide.with(this).load(recordUiModel.urlImage).into(ivPicture)
 
+            tvTitle.setOnClickListener {
+                newsCallback(OnTitleClicked(recordUiModel.author))
+            }
+
+            ivPicture.setOnClickListener {
+                newsCallback(OnImageClicked(recordUiModel.urlImage))
+            }
+
             cvNewsContainer.setOnClickListener {
-                CustomTabsIntent.Builder().build()
-                    .launchUrl(this.context, Uri.parse(recordUiModel.urlPath))
+                newsCallback(OnItemClicked(recordUiModel.urlPath))
+            }
+
+            cvNewsContainer.setOnLongClickListener {
+                newsCallback(OnLongItemClick)
+                true
             }
         }
     }
